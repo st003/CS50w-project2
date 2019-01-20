@@ -5,11 +5,17 @@
 {% endblock %}
 
 {% block main %}
-	<h1>Enter a username</h1>
-	<form>
-		<fieldset>
-			<input type="text" required>
-			<button type="submit">Submit</button>
-		</fieldset>
-	</form>
+
+	{% if not session.username %}
+		<h1>Enter a username</h1>
+		<form action="{{ url_for('index') }}" method="post">
+			<fieldset>
+				<input name="username" type="text" required>
+				<button type="submit">Submit</button>
+			</fieldset>
+		</form>
+	{% else %}
+		<h1>Channels</h1>
+	{% endif %}
+
 {% endblock %}
