@@ -1,4 +1,20 @@
-from flask import render_template
+from functools import wraps
+from flask import redirect, render_template, session, url_for
+
+
+def login_required(f):
+    """
+    Checks for an active session before rendering a page.
+
+    http://flask.pocoo.org/docs/1.0/patterns/viewdecorators/
+    """
+
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        if session.get('username') is None:
+            return redirect(url_for('index'))
+        return f(*args, **kwargs)
+    return decorated_function
 
 
 def error(error_message):

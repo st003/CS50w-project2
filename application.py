@@ -3,7 +3,7 @@ import os
 from flask import Flask, redirect, render_template, request, session, url_for
 from flask_socketio import SocketIO, emit
 
-from helpers import error
+from helpers import error, login_required
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = os.getenv("SECRET_KEY")
