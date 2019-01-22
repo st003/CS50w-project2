@@ -6,30 +6,40 @@
 
 {% block main %}
 
-	{% if not session.username %}
+	<div id="index">
 
-		<h1>Enter a username</h1>
-		<form action="{{ url_for('index') }}" method="post">
-			<fieldset>
-				<input name="username" type="text" placeholder="Enter Username" required>
-				<button type="submit">Submit</button>
-			</fieldset>
-		</form>
+		{% if not session.username %}
 
-	{% else %}
+			<h1>Enter a username</h1>
+			<form action="{{ url_for('index') }}" method="post">
+				<fieldset>
+					<input name="username" type="text" placeholder="Enter Username" required>
+					<button type="submit">Submit</button>
+				</fieldset>
+			</form>
 
-		<h1>Channels</h1>
-		<form>
-			<fieldset>
-				<label>Create New Channel</label>
-				<input name="channelName" type="text" placeholder="Enter Channel Name" required>
-				<button type="submit">Create</button>
-			</fieldset>
-		</form>
-		
-		<h2>Active Channels</h2>
-		<ul id="channelList"></ul>
+		{% else %}
 
-	{% endif %}
+			<h1>Channels</h1>
+			<form action="{{ url_for('put_channel') }}" method="post">
+				<fieldset>
+					<label>Create New Channel</label>
+					<input name="channelName" type="text" placeholder="Enter Channel Name" required>
+					<button type="submit">Create</button>
+				</fieldset>
+			</form>
+			
+			<h2>Active Channels</h2>
+			<ul id="channelList">
+				{% for channel in channels %}
+					<li>
+						<a href="#">{{ channel }}</a>
+					</li>
+				{% endfor %}
+			</ul>
+
+		{% endif %}
+
+	</div><!--#index-->
 
 {% endblock %}

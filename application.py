@@ -1,6 +1,6 @@
 import os
 
-from flask import Flask, redirect, render_template, request, session, url_for
+from flask import Flask, jsonify, redirect, render_template, request, session, url_for
 from flask_socketio import SocketIO, emit
 
 from helpers import error, login_required
@@ -22,7 +22,7 @@ def index():
 
     if request.method == 'GET':
 
-        return render_template('index.html')
+        return render_template('index.html', channels=CHANNELS)
 
     # http method is POST
     else:
@@ -42,3 +42,21 @@ def index():
             session['username'] = username
 
             return redirect(url_for('index'))
+
+
+# CHANNEL ROUTES
+@app.route("/channel/put", methods=['POST'])
+@login_required
+def put_channel():
+
+    if not request.form.get('channelName'):
+        return error('Channel name not provided')
+
+    new_channel = request.form.get('channelName')
+    
+    if new_channel in CHANNELS:
+        return error('A channel by that name already exists')
+    
+    CHANNELS[new_channel] = []
+    
+    return redirect(url_for('index'))
