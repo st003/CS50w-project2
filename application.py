@@ -12,6 +12,7 @@ socketio = SocketIO(app)
 # GLOBALS
 
 USERNAMES = set()
+CHANNELS = {}
 
 # VIEWS
 
