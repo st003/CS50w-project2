@@ -45,6 +45,16 @@ def index():
 
 
 # CHANNEL ROUTES
+@app.route("/channel/<channel_name>", methods=['GET'])
+@login_required
+def channel(channel_name):
+
+    if not channel_name:
+        return error('No channel name selected')
+    
+    return render_template('channel.html', channel_name=channel_name)
+
+
 @app.route("/channel/put", methods=['POST'])
 @login_required
 def put_channel():
