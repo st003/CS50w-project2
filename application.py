@@ -109,21 +109,19 @@ def post_messages():
         })
 
 
-@app.route("/messages/get", methods=['GET'])
+@app.route("/messages/get/<channel_name>", methods=['GET'])
 @login_required
-def get_messages():
+def get_messages(channel_name):
 
     try:
 
-        if not request.args.get('channelName'):
+        if not channel_name:
             raise ValueError('No channel name was provided')
-
-        channel = request.args.get('channelName')
 
         return jsonify({
             'result': True,
             'message': 'Success',
-            'content': list(CHANNELS[channel])
+            'content': list(CHANNELS[channel_name])
         })
     
     except Exception as error_message:
