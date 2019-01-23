@@ -1,4 +1,6 @@
 import os
+from datetime import datetime
+from collections import deque
 
 from flask import Flask, jsonify, redirect, render_template, request, session, url_for
 from flask_socketio import SocketIO, emit
@@ -9,10 +11,12 @@ app = Flask(__name__)
 app.config["SECRET_KEY"] = os.getenv("SECRET_KEY")
 socketio = SocketIO(app)
 
+
 # GLOBALS
 
 USERNAMES = set()
 CHANNELS = {}
+
 
 # VIEWS
 
@@ -67,6 +71,64 @@ def put_channel():
     if new_channel in CHANNELS:
         return error('A channel by that name already exists')
     
-    CHANNELS[new_channel] = []
+    CHANNELS[new_channel] = deque(maxlen=100)
     
     return redirect(url_for('index'))
+
+
+# MESSAGE ROUTES
+@app.route("/messages/post", methods=['POST'])
+@login_required
+def post_messages():
+
+    try:
+
+        if not request.form.get('channelName'):
+            raise ValueError('No channel name was provided')
+        if not request.form.get('message'):
+            raise ValueError('No message content was provided')
+
+        message = {
+            'username': session['username'],
+            'message': request.form.get('message'),
+            'timestamp': datetime.now()
+        }
+
+        CHANNELS[request.form.get('channelName')].append(message)
+    
+        return jsonify({
+            'result': True,
+            'message': 'Message posted successfully'
+        })
+    
+    except Exception as error_message:
+
+        return jsonify({
+            'result': False,
+            'message': f'{error_message}'
+        })
+
+
+@app.route("/messages/get", methods=['GET'])
+@login_required
+def get_messages():
+
+    try:
+
+        if not request.args.get('channelName'):
+            raise ValueError('No channel name was provided')
+
+        channel = request.args.get('channelName')
+
+        return jsonify({
+            'result': True,
+            'message': 'Success',
+            'content': list(CHANNELS[channel])
+        })
+    
+    except Exception as error_message:
+
+        return jsonify({
+            'result': False,
+            'message': f'{error_message}'
+        })

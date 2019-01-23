@@ -5,5 +5,14 @@
 {% endblock %}
 
 {% block main %}
-	<h1>{{ channel_name }}</h1>
+	<div id="channel">
+		<h1>{{ channel_name }}</h1>
+		<form id="messageForm">
+			<fieldset>
+				<input name="channelName" type="hidden" value="{{ channel_name }}">
+				<input name="message" type="text" placeholder="Enter a message" required>
+				<button type="submit">Send</button>
+			</fieldset>
+		</form>
+	</div><!--#channel-->
 {% endblock %}
