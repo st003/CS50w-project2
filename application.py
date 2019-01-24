@@ -55,8 +55,10 @@ def channel(channel_name):
 
     if not channel_name:
         return error('No channel name selected')
+
+    messages = CHANNELS[channel_name]
     
-    return render_template('channel.html', channel_name=channel_name)
+    return render_template('channel.html', channel_name=channel_name, messages=messages)
 
 
 @app.route("/channel/put", methods=['POST'])
@@ -99,29 +101,6 @@ def post_messages():
         return jsonify({
             'result': True,
             'message': 'Message posted successfully'
-        })
-    
-    except Exception as error_message:
-
-        return jsonify({
-            'result': False,
-            'message': f'{error_message}'
-        })
-
-
-@app.route("/messages/get/<channel_name>", methods=['GET'])
-@login_required
-def get_messages(channel_name):
-
-    try:
-
-        if not channel_name:
-            raise ValueError('No channel name was provided')
-
-        return jsonify({
-            'result': True,
-            'message': 'Success',
-            'content': list(CHANNELS[channel_name])
         })
     
     except Exception as error_message:
