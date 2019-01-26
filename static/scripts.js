@@ -1,43 +1,29 @@
 document.addEventListener('DOMContentLoaded', () => {
 
+    // connect to websocket
+    var socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port);
+
     // add scripts for channel template
     if (document.querySelector('#channel')) {
 
-        // add form submit listener
-        document.querySelector('#messageForm').onsubmit = () => {
+        // configure websocket event listeners
+        socket.on('connect', () => {
 
-            const request = new XMLHttpRequest();
+            document.querySelector('#messageForm').onsubmit = () => {
 
-            // get form data
-            const channelName = document.querySelector('input[name="channelName"]').value;
-            const message = document.querySelector('input[name="message"]').value;
+                // get form data
+                const channelName = document.querySelector('input[name="channelName"]').value;
+                const message = document.querySelector('input[name="message"]').value;
 
-            request.open('POST', '/messages/post');
+                socket.emit('submit public message', {'channelName': channelName, 'message': message});
 
-            // define behavior once request has been made
-            request.onload = () => {
-
-                const response = JSON.parse(request.responseText);
-                
-                if (!response.result) {
-                    alert(`${response.message}`);
-
-                } else {
-                    document.querySelector('#messageForm').reset();
-                }                 
+                // reset form and prevent the default submit behavior
+                document.querySelector('#messageForm').reset();
+                return false;
 
             }
 
-            // construct the form data
-            const postData = new FormData();
-            postData.append('channelName', channelName);
-            postData.append('message', message);
-
-            // fire off the request and ignore the default form functionality
-            request.send(postData);
-            return false;
-
-        }
+        });
 
     }
 

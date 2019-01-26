@@ -78,34 +78,21 @@ def put_channel():
     return redirect(url_for('index'))
 
 
-# MESSAGE ROUTES
-@app.route("/messages/post", methods=['POST'])
-@login_required
-def post_messages():
+# WEB SOCKETS
+@socketio.on('submit public message')
+def save_public_message(data):
 
-    try:
+    public_message = {
+        'username': session['username'],
+        'message': data['message'],
+        'timestamp': datetime.now().strftime('%m-%d-%Y %M:%S')
+    }
 
-        if not request.form.get('channelName'):
-            raise ValueError('No channel name was provided')
-        if not request.form.get('message'):
-            raise ValueError('No message content was provided')
+    # add latest message to channel
+    CHANNELS[data['channelName']].append(public_message)
 
-        message = {
-            'username': session['username'],
-            'message': request.form.get('message'),
-            'timestamp': datetime.now()
-        }
-
-        CHANNELS[request.form.get('channelName')].append(message)
-    
-        return jsonify({
-            'result': True,
-            'message': 'Message posted successfully'
-        })
-    
-    except Exception as error_message:
-
-        return jsonify({
-            'result': False,
-            'message': f'{error_message}'
-        })
+    emit(
+        'broadcast public message',
+        {'channelName': data['channelName'], 'publicMessage': public_message},
+        broadcast=True
+    )
