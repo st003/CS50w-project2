@@ -1,5 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
 
+    // compile template for adding new messages
+    const messageTemplate = Handlebars.compile('<div class="row message"><div class="col-10">{{ message }}</div><div class="col-2 text-right"><span class="metaData">{{ username }} - {{ timestamp }}</span></div></div>');
+
     // connect to websocket
     var socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port);
 
@@ -33,10 +36,9 @@ document.addEventListener('DOMContentLoaded', () => {
             // only update the DOM if the broadcasted message is meant for the current channel
             if (currentChannel == data.channelName) {
 
-                const div = document.createElement('div');
-                div.classList.add('message');
-                div.innerHTML = `${data.publicMessage.message} - ${data.publicMessage.timestamp} - ${data.publicMessage.username}`;
-                document.querySelector('#channelMessages').append(div);
+                const context = {'message': data.publicMessage.message, 'timestamp': data.publicMessage.timestamp, 'username': data.publicMessage.username}
+                const newMessage =  messageTemplate(context);
+                document.querySelector('#channelMessages').innerHTML += newMessage;
 
             }
 

@@ -4,6 +4,8 @@ $primary_color_active: gray;
 
 $secondary_color: #eeeeee;
 
+$background_color: white;
+
 $dark_text: black;
 $neutral_text: gray;
 
@@ -58,6 +60,7 @@ nav {
 /* CHANNELS */
 
 .channelMessageWrapper {
+    margin-bottom: 5rem;
     padding: 0 1rem;
     background-color: $secondary_color;
     border-radius: .5em;
@@ -81,15 +84,7 @@ nav {
     left: 0;
     width: 100%;
     padding: 1em;
+    background-color: $background_color;
     border-top: solid 1px $primary_color;
-
-    fieldset {
-        width: 100%;
-
-        input[name="message"] {
-            width: 70%;
-        }
-
-    }
 
 }

@@ -11,24 +11,28 @@
 
 		<section id="channelMessages" class="channelMessageWrapper">
 			{% for message in messages %}
-				<div class="row message">
-					<div class="col-10">
-						{{ message.message }}
-					</div><!--col-10-->
-					<div class="col-2 text-right">
-						<span class="metaData">{{ message.timestamp }} - {{ message.username }}</span>
-					</div>
-				</div><!--row-->
+					<div class="row message">
+						<div class="col-sm-12 col-md-8 col-xl-9">
+							{{ message.message }}
+						</div><!--col-->
+						<div class="col-sm-12 col-md-4 col-xl-3 text-right">
+							<span class="metaData">{{ message.username }} - {{ message.timestamp }}</span>
+						</div><!--col-->
+					</div><!--row-->
 			{% endfor %}
 		</section><!--channelMessageWrapper-->
 
 		<div class="messageFooter">
-			<form class="form-inline" id="messageForm">
-				<fieldset>
-					<input name="channelName" type="hidden" value="{{ channel_name }}">
-					<input class="form-control" name="message" type="text" placeholder="Enter your message" required>
-					<button class="btn primaryBtn form-control" type="submit">Submit</button>
-				</fieldset>
+			<form id="messageForm">
+				<div class="row">
+					<div class="col-xs-12 col-md-9 col-lg-10  col-xl-11 mb-1 px-2">
+						<input name="channelName" type="hidden" value="{{ channel_name }}">
+						<input class="form-control" name="message" type="text" placeholder="Enter your message" required>
+					</div><!--col-11-->
+					<div class="col-xs-12 col-md-3 col-lg-2 col-xl-1 px-2">
+						<button class="btn primaryBtn form-control" type="submit">Submit</button>
+					</div><!--col-1-->
+				</div><!--row-->
 			</form><!--#messageForm-->
 		</div><!--messageFooter-->
 

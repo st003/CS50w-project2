@@ -43,6 +43,7 @@ nav a {
 
 /* CHANNELS */
 .channelMessageWrapper {
+  margin-bottom: 5rem;
   padding: 0 1rem;
   background-color: #eeeeee;
   border-radius: .5em;
@@ -65,13 +66,6 @@ nav a {
   left: 0;
   width: 100%;
   padding: 1em;
+  background-color: white;
   border-top: solid 1px lightgray;
-}
-
-.messageFooter fieldset {
-  width: 100%;
-}
-
-.messageFooter fieldset input[name="message"] {
-  width: 70%;
 }
