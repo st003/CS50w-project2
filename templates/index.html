@@ -1,42 +1,68 @@
 {% extends "layout.html" %}
 
 {% block title %}
-	Index
+	Home
 {% endblock %}
 
 {% block main %}
 
-	<div id="index">
+	<div id="index" class="container">
 
 		{% if not session.username %}
 
-			<h1>Enter a username</h1>
-			<form action="{{ url_for('index') }}" method="post">
-				<fieldset>
-					<input name="username" type="text" placeholder="Enter Username" required>
-					<button type="submit">Submit</button>
-				</fieldset>
-			</form>
+			<div class="row justify-content-center loginPage">
+				<div class="col-lg-6 align-self-center text-center">
+
+					<h1 class="mb-4">Project2 - Flack</h1>
+
+					<div class="loginWrapper">
+
+						<form action="{{ url_for('index') }}" method="post">
+							<fieldset>
+								<div class="form-group">
+									<input class="form-control" name="username" type="text" placeholder="Enter a username" required>
+								</div><!--form-group-->
+								<div class="form-group mb-0">
+									<button class="form-control btn primaryBtn" type="submit">Submit</button>
+								</div><!--form-group-->
+							</fieldset>
+						</form>
+
+					</div><!--loginWrapper-->
+				</div><!--col-lg-6-->
+			</div><!--row-->
 
 		{% else %}
 
-			<h1>Channels</h1>
-			<form action="{{ url_for('put_channel') }}" method="post">
-				<fieldset>
-					<label>Create New Channel</label>
-					<input name="channelName" type="text" placeholder="Enter Channel Name" required>
-					<button type="submit">Create</button>
-				</fieldset>
-			</form>
+			<div class="row">
+				<div class="col">
+					<form class="form-inline justify-content-end my-3" action="{{ url_for('put_channel') }}" method="post">
+						<fieldset>
+							<div class="form-group">
+								<input class="form-control mr-1" name="channelName" type="text" placeholder="New Channel Name" required>
+								<button class="btn primaryBtn form-control" type="submit">Create</button>
+							</div><!--form-group-->
+						</fieldset>
+					</form><!--form-inline-->
+				</div><!--col-->
+			</div><!--row-->
 			
-			<h2>Active Channels</h2>
-			<ul id="channelList">
+			<table id="channelList" class="table">
+				<thead>
+					<tr>
+						<th>Active Channels</th>
+					</tr>
+				</thead>
+				<tbody>
 				{% for channel in channels %}
-					<li>
-						<a href="{{ url_for('channel', channel_name=channel) }}">{{ channel }}</a>
-					</li>
+					<tr>
+						<td>
+							<a href="{{ url_for('channel', channel_name=channel) }}">{{ channel }}</a>
+						</td>
+					</tr>
 				{% endfor %}
-			</ul>
+				</tbody>
+			</table><!--table-->
 
 		{% endif %}
 

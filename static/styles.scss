@@ -26,3 +26,29 @@ $neutral_text: gray;
 .primaryBtn:active {
     background-color: $primary_color_active;
 }
+
+/* LOGIN PAGE */
+
+.loginPage {
+    height: 100vh;
+}
+
+.loginWrapper {
+    padding: 1rem;
+    border: solid 1px $primary_color;
+    border-radius: .25rem;
+}
+
+/* MAIN NAV */
+
+nav {
+
+    padding: 1rem;
+    border-bottom: solid 1px $primary_color;
+
+    a {
+        display: inline-block;
+        margin: 0 1em;
+    }
+
+}

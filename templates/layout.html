@@ -18,6 +18,17 @@
 
 	<body>
 
+		{% if session.username %}
+			<nav class="row">
+				<div class="col">
+					<a href="{{ url_for('index') }}">Channels</a>
+				</div><!--col-->
+				<div class="col text-right">
+					<a>Posting as: {{ session.username }}</a>
+				</div><!--col-->
+			</nav><!--row-->
+		{% endif %}
+
 		<main>
 			{% block main %}{% endblock %}
 		</main>

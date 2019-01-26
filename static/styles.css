@@ -17,3 +17,25 @@
 .primaryBtn:active {
   background-color: gray;
 }
+
+/* LOGIN PAGE */
+.loginPage {
+  height: 100vh;
+}
+
+.loginWrapper {
+  padding: 1rem;
+  border: solid 1px lightgray;
+  border-radius: .25rem;
+}
+
+/* MAIN NAV */
+nav {
+  padding: 1rem;
+  border-bottom: solid 1px lightgray;
+}
+
+nav a {
+  display: inline-block;
+  margin: 0 1em;
+}
