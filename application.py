@@ -26,6 +26,11 @@ def index():
 
     if request.method == 'GET':
 
+        # redirect active users to last channel when starting new browser session
+        # this only applies to the index page
+        if session.get('last_channel') and not request.args.get('remember'):
+            return redirect(url_for('channel', channel_name=session.get('last_channel')))
+
         return render_template('index.html', channels=CHANNELS)
 
     # http method is POST
@@ -55,6 +60,12 @@ def channel(channel_name):
 
     if not channel_name:
         return error('No channel name selected')
+    
+    if channel_name not in CHANNELS:
+        return redirect(url_for('index'))
+    
+    # store last visited channel in the user's session 
+    session['last_channel'] = channel_name
 
     messages = CHANNELS[channel_name]
     
@@ -75,7 +86,7 @@ def put_channel():
     
     CHANNELS[new_channel] = deque(maxlen=100)
     
-    return redirect(url_for('index'))
+    return redirect(url_for('index', remember=False))
 
 
 # WEB SOCKETS
