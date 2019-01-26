@@ -1,0 +1,19 @@
+/* TEXT */
+.neutralText {
+  color: gray;
+}
+
+/* BUTTONS */
+.primaryBtn {
+  background-color: lightgray;
+  color: black;
+}
+
+.primaryBtn:hover {
+  background-color: white;
+  border: solid 1px lightgray;
+}
+
+.primaryBtn:active {
+  background-color: gray;
+}

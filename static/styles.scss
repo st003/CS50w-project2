@@ -1,0 +1,28 @@
+$primary_color: lightgray;
+$primary_color_hover: white;
+$primary_color_active: gray;
+
+$dark_text: black;
+$neutral_text: gray;
+
+/* TEXT */
+
+.neutralText {
+    color: $neutral_text;
+}
+
+/* BUTTONS */
+
+.primaryBtn {
+    background-color: $primary_color;
+    color: $dark_text;
+}
+
+.primaryBtn:hover {
+    background-color: $primary_color_hover;
+    border: solid 1px $primary_color;
+}
+
+.primaryBtn:active {
+    background-color: $primary_color_active;
+}
