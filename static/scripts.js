@@ -9,6 +9,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // add scripts for channel template
     if (document.querySelector('#publicChannel')) {
 
+        // page globals
+        const scrollPoint = document.querySelector('#scrollPoint');
+
         // configure websocket event listeners
         socket.on('connect', () => {
 
@@ -39,6 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const context = {'message': data.publicMessage.message, 'timestamp': data.publicMessage.timestamp, 'username': data.publicMessage.username}
                 const newMessage =  messageTemplate(context);
                 document.querySelector('#channelMessages').innerHTML += newMessage;
+                scrollPoint.scrollIntoView();
 
             }
 
