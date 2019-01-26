@@ -33,9 +33,10 @@ document.addEventListener('DOMContentLoaded', () => {
             // only update the DOM if the broadcasted message is meant for the current channel
             if (currentChannel == data.channelName) {
 
-                const li = document.createElement('li');
-                li.innerHTML = `${data.publicMessage.message} - ${data.publicMessage.timestamp} - ${data.publicMessage.username}`;
-                document.querySelector('#channelMessages').append(li);
+                const div = document.createElement('div');
+                div.classList.add('message');
+                div.innerHTML = `${data.publicMessage.message} - ${data.publicMessage.timestamp} - ${data.publicMessage.username}`;
+                document.querySelector('#channelMessages').append(div);
 
             }
 

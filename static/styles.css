@@ -31,6 +31,7 @@
 
 /* MAIN NAV */
 nav {
+  margin-right: 0 !important;
   padding: 1rem;
   border-bottom: solid 1px lightgray;
 }
@@ -38,4 +39,39 @@ nav {
 nav a {
   display: inline-block;
   margin: 0 1em;
+}
+
+/* CHANNELS */
+.channelMessageWrapper {
+  padding: 0 1rem;
+  background-color: #eeeeee;
+  border-radius: .5em;
+}
+
+.channelMessageWrapper .message {
+  padding: .5rem;
+  border-bottom: solid 1px lightgray;
+}
+
+.channelMessageWrapper .message .metaData {
+  color: gray;
+  font-size: .85rem;
+}
+
+/* MESSAGE SUBMIT FOOTER */
+.messageFooter {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 1em;
+  border-top: solid 1px lightgray;
+}
+
+.messageFooter fieldset {
+  width: 100%;
+}
+
+.messageFooter fieldset input[name="message"] {
+  width: 70%;
 }

@@ -38,10 +38,8 @@
 				<div class="col">
 					<form class="form-inline justify-content-end my-3" action="{{ url_for('put_channel') }}" method="post">
 						<fieldset>
-							<div class="form-group">
-								<input class="form-control mr-1" name="channelName" type="text" placeholder="New Channel Name" required>
-								<button class="btn primaryBtn form-control" type="submit">Create</button>
-							</div><!--form-group-->
+							<input class="form-control" name="channelName" type="text" placeholder="New Channel Name" required>
+							<button class="btn primaryBtn form-control" type="submit">Create</button>
 						</fieldset>
 					</form><!--form-inline-->
 				</div><!--col-->
@@ -50,7 +48,7 @@
 			<table id="channelList" class="table">
 				<thead>
 					<tr>
-						<th>Active Channels</th>
+						<th>Channels</th>
 					</tr>
 				</thead>
 				<tbody>

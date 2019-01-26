@@ -5,23 +5,32 @@
 {% endblock %}
 
 {% block main %}
-	<div id="publicChannel">
+	<div id="publicChannel" class="container-fluid">
 		
-		<h1>{{ channel_name }}</h1>
+		<h1 class="my-3">{{ channel_name }}</h1>
 
-		<ul id="channelMessages">
+		<section id="channelMessages" class="channelMessageWrapper">
 			{% for message in messages %}
-				<li>{{ message.message }} - {{ message.timestamp }} - {{ message.username }}</li>
+				<div class="row message">
+					<div class="col-10">
+						{{ message.message }}
+					</div><!--col-10-->
+					<div class="col-2 text-right">
+						<span class="metaData">{{ message.timestamp }} - {{ message.username }}</span>
+					</div>
+				</div><!--row-->
 			{% endfor %}
-		</ul>
+		</section><!--channelMessageWrapper-->
 
-		<form id="messageForm">
-			<fieldset>
-				<input name="channelName" type="hidden" value="{{ channel_name }}">
-				<input name="message" type="text" placeholder="Enter a message" required>
-				<button type="submit">Send</button>
-			</fieldset>
-		</form>
+		<div class="messageFooter">
+			<form class="form-inline" id="messageForm">
+				<fieldset>
+					<input name="channelName" type="hidden" value="{{ channel_name }}">
+					<input class="form-control" name="message" type="text" placeholder="Enter your message" required>
+					<button class="btn primaryBtn form-control" type="submit">Submit</button>
+				</fieldset>
+			</form><!--#messageForm-->
+		</div><!--messageFooter-->
 
-	</div><!--#channel-->
+	</div><!--container-fluid-->
 {% endblock %}

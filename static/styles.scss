@@ -2,6 +2,8 @@ $primary_color: lightgray;
 $primary_color_hover: white;
 $primary_color_active: gray;
 
+$secondary_color: #eeeeee;
+
 $dark_text: black;
 $neutral_text: gray;
 
@@ -42,13 +44,52 @@ $neutral_text: gray;
 /* MAIN NAV */
 
 nav {
-
+    margin-right: 0 !important;
     padding: 1rem;
     border-bottom: solid 1px $primary_color;
 
     a {
         display: inline-block;
         margin: 0 1em;
+    }
+
+}
+
+/* CHANNELS */
+
+.channelMessageWrapper {
+    padding: 0 1rem;
+    background-color: $secondary_color;
+    border-radius: .5em;
+
+    .message {
+        padding: .5rem;
+        border-bottom: solid 1px $primary_color;
+
+        .metaData {
+            color: $neutral_text;
+            font-size: .85rem;
+        }
+    }
+}
+
+/* MESSAGE SUBMIT FOOTER */
+
+.messageFooter {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 1em;
+    border-top: solid 1px $primary_color;
+
+    fieldset {
+        width: 100%;
+
+        input[name="message"] {
+            width: 70%;
+        }
+
     }
 
 }
