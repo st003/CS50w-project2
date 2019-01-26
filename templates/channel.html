@@ -5,11 +5,11 @@
 {% endblock %}
 
 {% block main %}
-	<div id="channel">
+	<div id="publicChannel">
 		
 		<h1>{{ channel_name }}</h1>
 
-		<ul>
+		<ul id="channelMessages">
 			{% for message in messages %}
 				<li>{{ message.message }} - {{ message.timestamp }} - {{ message.username }}</li>
 			{% endfor %}
