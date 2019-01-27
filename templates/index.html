@@ -79,7 +79,7 @@
 							{% if user != session.username %}
 								<tr>
 									<td>
-										<a href="{{ url_for('private_channel') }}">{{ user }}</a>
+										<a href="{{ url_for('private_channel', other_user=user) }}">{{ user }}</a>
 									</td>
 								</tr>
 							{% endif %}
@@ -89,8 +89,6 @@
 
 				</div><!--col-->
 			</div><!--row-->
-
-			
 
 		{% endif %}
 

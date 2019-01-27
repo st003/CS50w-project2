@@ -16,7 +16,7 @@ socketio = SocketIO(app)
 
 USERS = set()
 CHANNELS = {}
-PRIVATE = {}
+PRIVATES = {}
 
 
 # VIEWS
@@ -90,11 +90,19 @@ def put_channel():
     return redirect(url_for('index', remember=False))
 
 
-@app.route("/private_channel", methods=['GET'])
+@app.route("/private_channel/<other_user>", methods=['GET'])
 @login_required
-def private_channel():
+def private_channel(other_user):
 
-    return render_template('private_channel.html')
+    if not other_user:
+        return error('No other user was provided')
+    
+    users = frozenset([other_user, session['username']])
+
+    if users not in PRIVATES:
+        PRIVATES[users] = deque(maxlen=100)
+
+    return render_template('private_channel.html', other_user=other_user, messages=PRIVATES[users])
 
 
 # WEB SOCKETS
