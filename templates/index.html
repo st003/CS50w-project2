@@ -76,11 +76,13 @@
 						</thead>
 						<tbody>
 						{% for user in users %}
-							<tr>
-								<td>
-									<a href="{{ url_for('private_channel') }}">{{ user }}</a>
-								</td>
-							</tr>
+							{% if user != session.username %}
+								<tr>
+									<td>
+										<a href="{{ url_for('private_channel') }}">{{ user }}</a>
+									</td>
+								</tr>
+							{% endif %}
 						{% endfor %}
 						</tbody>
 					</table><!--table-->
