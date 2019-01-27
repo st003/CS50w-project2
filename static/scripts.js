@@ -50,4 +50,32 @@ document.addEventListener('DOMContentLoaded', () => {
 
     }
 
+    // add scripts for private channel template
+    if (document.querySelector('#privateChannel')) {
+
+        // page globals
+        const scrollPoint = document.querySelector('#scrollPoint');
+
+        // configure websocket event listeners
+        socket.on('connect', () => {
+
+            document.querySelector('#messageForm').onsubmit = () => {
+
+                // get form data
+                const otherUser = document.querySelector('input[name="otherUser"]').value;
+                const message = document.querySelector('input[name="message"]').value;
+
+                socket.emit('submit private message', {'otherUser': otherUser, 'message': message});
+
+                // reset form and prevent the default submit behavior
+                document.querySelector('#messageForm').reset();
+                return false;
+
+            }
+
+        });
+
+    }
+
+
 });

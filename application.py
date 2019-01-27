@@ -123,3 +123,24 @@ def save_public_message(data):
         {'channelName': data['channelName'], 'publicMessage': public_message},
         broadcast=True
     )
+
+
+@socketio.on('submit private message')
+def save_private_message(data):
+
+    private_message = {
+        'username': session['username'],
+        'message': data['message'],
+        'timestamp': datetime.now().strftime('%m-%d-%Y %M:%S')
+    }
+
+    users = frozenset([data['otherUser'], session['username']])
+
+    # add latest message to channel
+    PRIVATES[users].append(private_message)
+
+    emit(
+        'broadcast private message',
+        {'otherUser': data['otherUser'], 'privateMessage': private_message},
+        broadcast=True
+    )
