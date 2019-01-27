@@ -75,7 +75,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
         });
 
-    }
+        // listen for a broadcast of a private message
+        socket.on('broadcast private message', data => {
 
+            const channelHash = document.querySelector('input[name="channelHash"]').value;
+
+            // only update the DOM if the broadcasted message is meant for the current channel
+            if (channelHash == data.channelHash) {
+
+                const context = {'message': data.privateMessage.message, 'timestamp': data.privateMessage.timestamp, 'username': data.privateMessage.username}
+                const newMessage =  messageTemplate(context);
+                document.querySelector('#channelMessages').innerHTML += newMessage;
+                scrollPoint.scrollIntoView();
+
+            }
+
+        });
+
+    }
 
 });

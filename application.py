@@ -102,7 +102,12 @@ def private_channel(other_user):
     if users not in PRIVATES:
         PRIVATES[users] = deque(maxlen=100)
 
-    return render_template('private_channel.html', other_user=other_user, messages=PRIVATES[users])
+    return render_template(
+        'private_channel.html',
+        other_user=other_user,
+        messages=PRIVATES[users],
+        channel_hash=hash(users)
+    )
 
 
 # WEB SOCKETS
@@ -141,6 +146,6 @@ def save_private_message(data):
 
     emit(
         'broadcast private message',
-        {'otherUser': data['otherUser'], 'privateMessage': private_message},
+        {'channelHash': hash(users), 'privateMessage': private_message},
         broadcast=True
     )
