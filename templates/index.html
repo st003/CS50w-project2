@@ -6,7 +6,7 @@
 
 {% block main %}
 
-	<div id="index" class="container">
+	<div id="index" class="container-fluid">
 
 		{% if not session.username %}
 
@@ -36,7 +36,7 @@
 
 			<div class="row">
 				<div class="col">
-					<form class="form-inline justify-content-end my-3" action="{{ url_for('put_channel') }}" method="post">
+					<form class="form-inline my-3" action="{{ url_for('put_channel') }}" method="post">
 						<fieldset>
 							<input class="form-control" name="channelName" type="text" placeholder="New Channel Name" required>
 							<button class="btn primaryBtn form-control" type="submit">Create</button>
@@ -44,23 +44,51 @@
 					</form><!--form-inline-->
 				</div><!--col-->
 			</div><!--row-->
+
+			<div class="row">
+				<div class="col-sm-12 col-md-6">
+					
+					<table id="channelList" class="table">
+						<thead>
+							<tr>
+								<th>Channels</th>
+							</tr>
+						</thead>
+						<tbody>
+						{% for channel in channels %}
+							<tr>
+								<td>
+									<a href="{{ url_for('channel', channel_name=channel) }}">{{ channel }}</a>
+								</td>
+							</tr>
+						{% endfor %}
+						</tbody>
+					</table><!--table-->
+
+				</div><!--col-->
+				<div class="col-sm-12 col-md-6">
+
+					<table id="userList" class="table">
+						<thead>
+							<tr>
+								<th>Users</th>
+							</tr>
+						</thead>
+						<tbody>
+						{% for user in users %}
+							<tr>
+								<td>
+									<a href="#">{{ user }}</a>
+								</td>
+							</tr>
+						{% endfor %}
+						</tbody>
+					</table><!--table-->
+
+				</div><!--col-->
+			</div><!--row-->
+
 			
-			<table id="channelList" class="table">
-				<thead>
-					<tr>
-						<th>Channels</th>
-					</tr>
-				</thead>
-				<tbody>
-				{% for channel in channels %}
-					<tr>
-						<td>
-							<a href="{{ url_for('channel', channel_name=channel) }}">{{ channel }}</a>
-						</td>
-					</tr>
-				{% endfor %}
-				</tbody>
-			</table><!--table-->
 
 		{% endif %}
 

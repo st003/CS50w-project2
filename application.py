@@ -14,7 +14,7 @@ socketio = SocketIO(app)
 
 # GLOBALS
 
-USERNAMES = set()
+USERS = set()
 CHANNELS = {}
 
 
@@ -31,7 +31,7 @@ def index():
         if session.get('last_channel') and not request.args.get('remember'):
             return redirect(url_for('channel', channel_name=session.get('last_channel')))
 
-        return render_template('index.html', channels=CHANNELS)
+        return render_template('index.html', channels=CHANNELS, users=USERS)
 
     # http method is POST
     else:
@@ -41,13 +41,13 @@ def index():
 
         username = request.form.get('username')
 
-        if username in USERNAMES:
+        if username in USERS:
 
             return error('Username is taken')
 
         else:
 
-            USERNAMES.add(username)
+            USERS.add(username)
             session['username'] = username
 
             return redirect(url_for('index'))
