@@ -16,6 +16,7 @@ socketio = SocketIO(app)
 
 USERS = set()
 CHANNELS = {}
+PRIVATE = {}
 
 
 # VIEWS
@@ -87,6 +88,13 @@ def put_channel():
     CHANNELS[new_channel] = deque(maxlen=100)
     
     return redirect(url_for('index', remember=False))
+
+
+@app.route("/private_channel", methods=['GET'])
+@login_required
+def private_channel():
+
+    return render_template('private_channel.html')
 
 
 # WEB SOCKETS

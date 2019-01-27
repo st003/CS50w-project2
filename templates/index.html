@@ -78,7 +78,7 @@
 						{% for user in users %}
 							<tr>
 								<td>
-									<a href="#">{{ user }}</a>
+									<a href="{{ url_for('private_channel') }}">{{ user }}</a>
 								</td>
 							</tr>
 						{% endfor %}
