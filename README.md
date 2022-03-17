@@ -1,6 +1,6 @@
 # CS50w project2
 
-CS50w project2 is a instant messaging web application. Users may resgister username, browse channels, and submit messages, both public and private. The application is built with the flask web framework and relies on web sockets and javascript for realtime communication.
+CS50w project2 is a instant messaging web application. Users may register username, browse channels, and submit messages, both public and private. The application is built with the flask web framework and relies on web sockets and javascript for realtime communication.
 
 For my personal touch, I implemented private messaging functionality. Users may submit private messages to any other user in the system by selecting their name from the user table on the home screen. The private channel view functions much in the same way as public channels, but messages are keep isolated between the two users.
 
